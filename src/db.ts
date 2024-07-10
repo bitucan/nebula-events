@@ -64,3 +64,11 @@ export const progress = Schema("progress", {
   index: { type: Number },
   error: { type: String },
 });
+
+export function loadCollections(lastIdProcessed?: number): Collection[] {
+  if (lastIdProcessed) {
+    return collections.find({ index: { $gt: lastIdProcessed } });
+  } else {
+    return collections.find();
+  }
+}
