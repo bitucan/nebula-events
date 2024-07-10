@@ -1,0 +1,5 @@
+databases
+env
+node_modules
+dist
+/src/load.ts

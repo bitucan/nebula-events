@@ -1,0 +1,30 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc-watch --onSuccess \"node dist/index.js\"",
+    "load": "tsc-watch --onSuccess \"nodemon dist/load.js\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/async": "^3.2.24",
+    "@types/node": "^20.14.10",
+    "async": "^3.2.5",
+    "axios": "^1.7.2",
+    "db-local": "^3.1.0",
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "tsc-watch": "^6.2.0",
+    "typescript": "^5.5.3",
+    "uuid": "^10.0.0",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/uuid": "^10.0.0"
+  }
+}
