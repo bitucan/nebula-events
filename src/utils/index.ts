@@ -1,5 +1,6 @@
 import { generateCollectionEvent } from "../generateEvent";
-import { Collection, events_collections, progress } from "../db";
+import { Collection, collections, events_collections } from "../db";
+import logger from "../logger";
 
 function chunkArray(array: Collection[], size: number): Collection[][] {
   const chunkedArr: Collection[][] = [];
@@ -26,7 +27,6 @@ function setKeyword(keywords: string, keyword: string) {
 
   return resultado;
 }
-
 async function processCollections(
   batch: Collection[],
   batchIndex: number,
@@ -43,7 +43,7 @@ async function processCollections(
           keywords: setKeyword(record.keywords, "black friday"),
         });
 
-        events_collections
+        await events_collections
           .create({
             ...collection,
             url: combineStrings(record.url, "black-friday"),
@@ -51,21 +51,21 @@ async function processCollections(
           })
           .save();
 
+        logger.info("Record processed successfully", { recordId: record.id });
+        collections.remove({ id: record.id });
+
         await new Promise((resolve) => setTimeout(resolve, 500));
       } catch (err) {
-        throw {
-          error: err,
-          index: record.index,
-          id: record.id,
-          batchIndex,
-        };
+        logger.error("Error processing record", {
+          recordId: record.id,
+        });
       }
     }
 
     callback(null);
   } catch (error: any) {
-    progress.create({ index: error.index, error }).save();
-    callback(error.error);
+    logger.error("Error processing batch", { batchIndex });
+    callback(error);
   }
 }
 

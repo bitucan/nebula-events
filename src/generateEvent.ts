@@ -1,12 +1,15 @@
 import { Collection } from "./db";
-import { nebula } from "./nebula";
 import { v4 as uuid } from "uuid";
+import axios from "axios";
 
 export const generateCollectionEvent = async (collection: Collection) => {
   try {
-    const res = await nebula.post("/v1/events/content", {
-      collection,
-    });
+    const res = await axios.post(
+      "https://nebula-dev-hakrlu77ba-uc.a.run.app/v1/events/content",
+      {
+        collection,
+      }
+    );
 
     return {
       ...collection,

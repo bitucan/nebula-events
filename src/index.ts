@@ -1,20 +1,14 @@
 import async from "async";
 import { loadCollections, type Collection } from "./db";
-import { progress } from "./db";
 import dotenv from "dotenv";
 import { chunkArray, processCollections } from "./utils";
 
 dotenv.config();
 
 async function main() {
-  const lastIndex = progress.find();
   let records: Collection[] = [];
 
-  if (lastIndex) {
-    records = loadCollections(lastIndex);
-  } else {
-    records = loadCollections();
-  }
+  records = loadCollections();
 
   const chunkedRecords: Collection[][] = chunkArray(records, 500);
 

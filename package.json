@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsc-watch --onSuccess \"node dist/index.js\"",
-    "load": "tsc-watch --onSuccess \"nodemon dist/load.js\""
+    "load": "tsc-watch --onSuccess \"nodemon dist/src/load.js\"",
+    "transform": "tsc-watch --onSuccess \"nodemon dist/src/xlsx.js\"",
+    "remove-dp": "tsc-watch --onSuccess \"node dist/src/remove-duplicated.js\"",
+    "split": "tsc-watch --onSuccess \"node dist/src/split.js\""
   },
   "keywords": [],
   "author": "",
@@ -22,6 +25,7 @@
     "tsc-watch": "^6.2.0",
     "typescript": "^5.5.3",
     "uuid": "^10.0.0",
+    "winston": "^3.13.1",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
